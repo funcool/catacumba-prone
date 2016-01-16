@@ -1,4 +1,4 @@
-(defproject funcool/catacumba-prone "0.1.0"
+(defproject funcool/catacumba-prone "0.2.0"
   :description "A prone integration for catacumba"
   :url "http://github.com/funcool/catacumba-prone"
   :license {:name "BSD (2-Clause)"

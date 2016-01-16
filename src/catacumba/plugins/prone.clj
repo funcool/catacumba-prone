@@ -1,4 +1,4 @@
-(ns catacumba.pluggins.prone
+(ns catacumba.plugins.prone
   "A prone exception reporting middleware integration."
   (:require [prone.debug :as pdbg]
             [prone.middleware :as pmdw]
