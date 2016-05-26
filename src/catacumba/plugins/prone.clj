@@ -5,6 +5,7 @@
             [catacumba.core :as ct]
             [catacumba.http :as http]
             [catacumba.handlers.misc :as misc]
+            [catacumba.impl.helpers :as hp]
             [catacumba.impl.routing :as rt]
             [catacumba.impl.handlers :as hs])
   (:import ratpack.handling.Chain))
