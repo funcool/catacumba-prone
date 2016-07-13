@@ -4,7 +4,6 @@
             [prone.middleware :as pmdw]
             [catacumba.core :as ct]
             [catacumba.http :as http]
-            [catacumba.helpers :as hp]
             [catacumba.handlers.misc :as misc]
             [catacumba.impl.routing :as rt]
             [catacumba.impl.handlers :as hs])
@@ -31,4 +30,3 @@
     (-> chain
         (.all (hs/adapter prone-assets))
         (rt/attach-server-error-handler #(prone-errors %1 %2 namespaces)))))
-
