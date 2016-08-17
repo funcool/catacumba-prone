@@ -19,7 +19,7 @@ here is a integration that allows you use almost all features that it exposes.
 For use it on your application, add the appropriate dependency:
 
 ```clojure
-[funcool/catacumba-prone "0.2.1"]
+[funcool/catacumba-prone "0.4.0"]
 ```
 
 Later, add the prone handler to you route chain:
