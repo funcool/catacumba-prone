@@ -5,10 +5,14 @@
             [catacumba.core :as ct]
             [catacumba.http :as http]
             [catacumba.handlers.misc :as misc]
+            [catacumba.impl.context :as ctx]
             [catacumba.impl.helpers :as hp]
             [catacumba.impl.routing :as rt]
             [catacumba.impl.handlers :as hs])
-  (:import ratpack.handling.Chain))
+  (:import ratpack.handling.Chain
+           ratpack.func.Action
+           ratpack.error.ServerErrorHandler
+           ratpack.registry.RegistrySpec))
 
 (defn- prone-assets
   [ctx]
@@ -25,9 +29,23 @@
   (binding [pdbg/*debug-data* (atom [])]
     (pmdw/exceptions-response context error namespaces)))
 
+(defn- attach-server-error-handler
+  [^Chain chain handler]
+  (letfn [(callback [context throwable]
+            (let [response (handler context throwable)]
+              (when (satisfies? hs/IHandlerResponse response)
+                (hs/-handle-response response context))))
+          (on-register [^RegistrySpec rspec]
+            (->> (reify ServerErrorHandler
+                   (error [_ ctx throwable]
+                     (let [context (ctx/create-context ctx)]
+                       (callback context throwable))))
+                 (.add rspec ServerErrorHandler)))]
+    (.register chain ^Action (hp/fn->action on-register))))
+
 (defn handler
   [{:keys [namespaces]}]
   (fn [^Chain chain]
     (-> chain
         (.all (hs/adapter prone-assets))
-        (rt/attach-server-error-handler #(prone-errors %1 %2 namespaces)))))
+        (attach-server-error-handler #(prone-errors %1 %2 namespaces)))))
