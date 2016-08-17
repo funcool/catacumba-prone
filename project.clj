@@ -1,4 +1,4 @@
-(defproject funcool/catacumba-prone "0.3.0"
+(defproject funcool/catacumba-prone "0.4.0"
   :description "A prone integration for catacumba"
   :url "http://github.com/funcool/catacumba-prone"
   :license {:name "BSD (2-Clause)"
@@ -9,5 +9,5 @@
                   "-Xlint:-options" "-Xlint:unchecked"]
   :plugins [[lein-ancient "0.6.10"]]
   :dependencies [[org.clojure/clojure "1.8.0" :scope "provided"]
-                 [funcool/catacumba "0.16.0" :scope "provided"]
+                 [funcool/catacumba "1.0.0" :scope "provided"]
                  [prone "1.1.1"]])
